@@ -6,6 +6,9 @@
 6. php artisan key:generate
 7. php artisan migrate:fresh --seed
 8. php artisan serve
+9. npm install
+10. npm run dev
+
 
 email : admin@gmail.com <br>
 password : 12345678
