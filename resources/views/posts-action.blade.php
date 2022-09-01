@@ -1,0 +1,2 @@
+<a href="javascript:void(0)" data-id="{{ '.$row->id.' }}" onclick="editPost(event.target)" class="btn btn-info">Edit</a>
+                <a href="javascript:void(0)" data-id="{{ '.$row->id.' }}" class="btn btn-danger" onclick="deletePost(event.target)">Delete</a>';
