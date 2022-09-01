@@ -6,6 +6,5 @@
 6. php artisan key:generate
 7. php artisan migrate:fresh --seed
 8. php artisan serve
-
 email : admin@gmail.com
 password : 12345678
