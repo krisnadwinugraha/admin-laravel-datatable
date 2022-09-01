@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'name' => 'Pelanggan', 
             'email' => 'pelanggan@gmail.com',
             'phone' => '083147173945',
-            'password' => bcrypt('123qq123'),
+            'password' => bcrypt('12345678'),
             'alamat' => 'bandung',
         ]);
      
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
             'name' => 'Agent', 
             'email' => 'agent@gmail.com',
             'phone' => '083147173235',
-            'password' => bcrypt('123qq123'),
+            'password' => bcrypt('12345678'),
             'alamat' => 'bandung',
         ]);
 
@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
             'name' => 'kurir', 
             'email' => 'kurir@gmail.com',
             'phone' => '084147173945',
-            'password' => bcrypt('123qq123'),
+            'password' => bcrypt('12345678'),
             'alamat' => 'bandung',
         ]);
 
@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
             'name' => 'Driver', 
             'email' => 'driver@gmail.com',
             'phone' => '084137173945',
-            'password' => bcrypt('123qq123'),
+            'password' => bcrypt('12345678'),
             'alamat' => 'bandung',
         ]);
 
