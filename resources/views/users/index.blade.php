@@ -66,7 +66,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                   <div class="form-group">
                       <strong>Role:</strong>
-                      {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
+                      {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple' , 'id' => 'role')) !!}
                   </div>
                 </div>
 
@@ -157,7 +157,7 @@ $(function() {
     var password = $("#password").val();
     var phone = $("#phone").val();
     var alamat = $("#alamat").val();
-    var role = $("#role").val();
+    var role = $('#role option:selected').val();
     var id = $("#user_id").val();
     let _url     = `/users`;
     let _token   = $('meta[name="csrf-token"]').attr('content');
@@ -186,6 +186,7 @@ $(function() {
                 oTable.fnDraw(false)
                  swal("Created!", "Data Has Been Created", "success");
               }
+              $("#id").val('');
               $("#name").val('');
               $("#email").val('');
               $("#password").val('');

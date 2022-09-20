@@ -69,7 +69,9 @@ class UserController extends Controller
             'phone' => $request->phone,
             'alamat' => $request->alamat
         ]);
-       
+
+        $user->roles()->detach();
+        $user->assignRole($request->input('role'));
               
         return response()->json(['code'=>200, 'message'=>'User Created successfully','data' => $user], 200);
 
