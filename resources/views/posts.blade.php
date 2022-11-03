@@ -12,19 +12,22 @@
 
     <div class="row" style="clear: both;margin-top: 18px;">
         <div class="col-12">
-          
+        <div class="table-responsive">
           <table id="laravel_crud" class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
                     <th>Description</th>
+                    <th>Category ID</th>
+                    <th>Image</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
           </table>
+        </div>
        </div>
     </div>
 </div>
@@ -56,6 +59,22 @@
                         <span id="descriptionError" class="alert-message"></span>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="category_id">Category ID</label>
+                    <div class="col-sm-12">
+                        {!! Form::select('category_id', $category,[], array('class' => 'form-control', 'id' => 'category_id' )) !!}
+                        <span id="categoryError" class="alert-message"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bukti_setoran">Image</label>
+                    <div class="col-sm-12">
+                        <input type="file" class="form-control" id="image" name="image">
+                        <span id="imageError" class="alert-message"></span>
+                    </div>
+                </div>
             </form>
         </div>
         <div class="modal-footer">
@@ -71,6 +90,7 @@
 
 @section('js')
 <script>
+   var SITEURL = '{{URL::to('')}}';
   $(function() {
     $('#laravel_crud').DataTable({
         processing: true,
@@ -80,6 +100,17 @@
             { data: 'id', name: 'id' },
             { data: 'title', name: 'title' },
             { data: 'description', name: 'description' },
+            { data: 'category_id', name: 'category_id' },
+            {
+                  "name": "image",
+                  "data": "image",
+                  "render": function (data, type, full, meta) {
+                      return "<img src=\"img/post/" + data + "\" height=\"100\"/>";
+                  },
+                  "title": "Image",
+                  "orderable": true,
+                  "searchable": true
+            },
             {
               data: 'action',
               name: 'action' ,
@@ -100,6 +131,8 @@
     let _url = `/posts/${id}`;
     $('#titleError').text('');
     $('#descriptionError').text('');
+    $('#categoryError').text('');
+    $('#imageError').text('');
 
     $.ajax({
       url: _url,
@@ -109,28 +142,39 @@
             $("#post_id").val(response.id);
             $("#title").val(response.title);
             $("#description").val(response.description);
+            $("#image").attr('src', SITEURL +'public/img/post/'+response.image);
+            $('#hidden_image').attr('src', SITEURL +'public/img/post/'+response.image);
+            $("#category_id").val(response.category_id);
             $('#post-modal').modal('show');
           }
       }
     });
   }
 
-  function createPost() {
+  function createPost() {   
     var title = $('#title').val();
     var description = $('#description').val();
+    var image = $('#image[type=file]').val();
+    var category_id = $('#category_id option:selected').val();
     var id = $('#post_id').val();
     let _url     = `/posts`;
     let _token   = $('meta[name="csrf-token"]').attr('content');
 
+    var formData = new FormData();
+        formData.append('id', id);
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('image', $('#image[type=file]')[0].files[0]);
+        formData.append('category_id', category_id);
+        formData.append('_token', _token);
+
       $.ajax({
         url: _url,
         type: "POST",
-        data: {
-          id: id,
-          title: title,
-          description: description,
-          _token: _token
-        },
+        data: formData,
+        processData: false,
+        contentType: false,
+        cache: false,
         success: function(response) {
             if(response.code == 200) {
               if(id != ""){
@@ -144,6 +188,8 @@
               }
               $('#title').val('');
               $('#description').val('');
+              $('#image').val('');
+              $('#category_id').val('');
 
               $('#post-modal').modal('hide');
             }

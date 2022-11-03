@@ -293,11 +293,13 @@ return [
             'text' => 'Posts',
             'url'  => 'posts',
             'icon' => 'fas fa-fw fa-edit',
+            'can' => 'posts-list'
         ],
         [
             'text' => 'Category',
             'url'  => 'categories',
             'icon' => 'fas fa-fw fa-bars',
+            'can' => 'category-list'
         ],
         [
             'text'    => 'multilevel',
@@ -337,22 +339,21 @@ return [
                 ],
             ],
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'account_settings',
+        'can' => 'users-list'],
         [
             'text' => 'User',
             'url'  => 'users',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'users-list'
         ],
         [
             'text' => 'Role',
             'url'  => 'role',
             'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'Setting',
-            'url'  => 'setting',
-            'icon' => 'fas fa-fw fa-cogs',
-        ],
+            'can' => 'role-list'
+
+        ]
     ],
 
     /*

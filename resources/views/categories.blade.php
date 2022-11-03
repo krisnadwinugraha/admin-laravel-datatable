@@ -12,7 +12,7 @@
     
     <div class="row" style="clear: both;margin-top: 18px;">
         <div class="col-12">
-          
+        <div class="table-responsive">
           <table id="laravel_crud" class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -24,6 +24,7 @@
             <tbody>
             </tbody>
           </table>
+        </div>
        </div>
     </div>
 </div>

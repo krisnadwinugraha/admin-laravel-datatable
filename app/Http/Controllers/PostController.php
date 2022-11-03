@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Redirect,Response;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -28,6 +29,7 @@ class PostController extends Controller
     public function index()
     {
         $data['posts'] = Post::orderBy('id','desc')->paginate(8);
+        $data['category'] = Category::pluck('name','id')->all();
 
         return view('posts', $data);
     }
@@ -41,17 +43,30 @@ class PostController extends Controller
      */
      public function store(Request $request)
      {
-         $request->validate([
-           'title'       => 'required|max:255',
-           'description' => 'required',
-         ]);
+        $request->validate([
+            'title'       => 'required|max:255',
+            'description' => 'required',
+            'category_id' => 'required',
+            'image' => 'nullable',
+        ]);
 
-         $post = Post::updateOrCreate(['id' => $request->id], [
-                   'title' => $request->title,
-                   'description' => $request->description
-                 ]);
+        $post = Post::updateOrCreate(['id' => $request->id], [
+            'title' => $request->title,
+            'description' => $request->description,
+            'category_id' => $request->category_id
+        ]);
 
-         return response()->json(['code'=>200, 'message'=>'Post Created successfully','data' => $post], 200);
+        if($request->file('image')){
+            \File::delete(public_path('img/post').$request->hidden_image);
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('img/post'), $filename);
+            $post['image']= $filename;
+        }
+
+        $post->save();
+
+        return response()->json(['code'=>200, 'message'=>'Post Created successfully','data' => $post], 200);
 
      }
 

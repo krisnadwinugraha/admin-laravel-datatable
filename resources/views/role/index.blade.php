@@ -19,15 +19,13 @@
 
 @section('content')
   <div class="container">
-    
-
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
     @endif
-
-    <table id="myTable" class="table table-stripped">
+    <div class="table-responsive">
+      <table id="myTable" class="table table-stripped">
         <thead>
           <tr>
             <th>ID</th>
@@ -39,6 +37,7 @@
         <tbody>
         </tbody>
       </table>
+    </div>
   </div>
 @stop
 

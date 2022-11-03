@@ -17,6 +17,9 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -9,6 +9,7 @@
 
 @section('content')
   <div class="container">
+    <div class="table-responsive">
       <table id="laravel_crud" class="table table-stripped">
         <thead>
           <tr>
@@ -24,6 +25,7 @@
         <tbody>
         </tbody>
       </table>
+    </div>  
   </div>
 </div>
 
