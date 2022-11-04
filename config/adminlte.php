@@ -302,6 +302,12 @@ return [
             'can' => 'category-list'
         ],
         [
+            'text' => 'Transfer',
+            'url'  => 'transfer',
+            'icon' => 'fas fa-fw fa-credit-card',
+            'can' => 'category-list'
+        ],
+        [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [

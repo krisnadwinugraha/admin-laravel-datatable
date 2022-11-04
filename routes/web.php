@@ -5,6 +5,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TransferController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,11 +32,16 @@ Route::get('/userData', [UserController::class, 'userData'])->name('userData');
 Route::get('/roleData', [RoleController::class, 'roleData'])->name('roleData');
 Route::get('/postData', [PostController::class, 'postData'])->name('postData');
 Route::get('/categoryData', [CategoryController::class, 'categoryData'])->name('categoryData');
+Route::get('/transferData', [TransferController::class, 'transferData'])->name('transferData');
+Route::get('export', [TransferController::class, 'export'])->name('export');
+Route::post('import', [TransferController::class, 'import'])->name('import');
+Route::get('/pdf', [TransferController::class, 'pdf'])->name('pdf');
 
-Route::resource('posts', PostController::class);
-Route::resource('categories', CategoryController::class);
+Route::resource('transfer', TransferController::class);
 
 Route::group(['middleware' => ['auth']], function() {
+    Route::resource('categories', CategoryController::class);
+    Route::resource('posts', PostController::class);
     Route::resource('users', UserController::class);
     Route::resource('role', RoleController::class);
 });
