@@ -6,10 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Redirect,Response;
-
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\Datatables\Datatables;
-
 use Spatie\Permission\Models\Role;
 use DB;
 use Illuminate\Support\Arr;
@@ -18,16 +16,12 @@ class UserController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:users-list|users-create|users-edit|users-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:users-create', ['only' => ['create','store']]);
-         $this->middleware('permission:users-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:users-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:users-list|users-create|users-edit|users-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:users-create', ['only' => ['create','store']]);
+        $this->middleware('permission:users-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:users-delete', ['only' => ['destroy']]);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
         $data = User::orderBy('id','DESC')->paginate(5);
@@ -36,22 +30,6 @@ class UserController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {   
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -73,29 +51,14 @@ class UserController extends Controller
         $user->roles()->detach();
         $user->assignRole($request->input('role'));
               
-        return response()->json(['code'=>200, 'message'=>'User Created successfully','data' => $user], 200);
-
-                        
+        return response()->json(['code'=>200, 'message'=>'User Created successfully','data' => $user], 200);                  
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $user = User::find($id);
-        return response()->json($user);
+        return response()->json(User::find($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {   
         $user = User::find($id);
@@ -104,28 +67,9 @@ class UserController extends Controller
         return Response::json($user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $user= User::find($id)->delete();
-        return Response::json($user);
+        return Response::json(User::find($id)->delete());
     }
 
     public function userData(Request $request)

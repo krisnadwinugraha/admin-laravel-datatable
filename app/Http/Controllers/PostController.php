@@ -11,47 +11,34 @@ use Yajra\Datatables\Datatables;
 use DB;
 use Illuminate\Support\Arr;
 
-
 class PostController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:posts-list|posts-create|posts-edit|posts-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:posts-create', ['only' => ['create','store']]);
-         $this->middleware('permission:posts-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:posts-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:posts-list|posts-create|posts-edit|posts-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:posts-create', ['only' => ['create','store']]);
+        $this->middleware('permission:posts-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:posts-delete', ['only' => ['destroy']]);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $data['posts'] = Post::orderBy('id','desc')->paginate(8);
         $data['category'] = Category::pluck('name','id')->all();
-
         return view('posts', $data);
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-     public function store(Request $request)
-     {
+    public function store(Request $request)
+    {
         $request->validate([
             'title'       => 'required|max:255',
             'description' => 'required',
             'category_id' => 'required',
-            'image' => 'nullable',
+            'image'       => 'nullable',
         ]);
 
         $post = Post::updateOrCreate(['id' => $request->id], [
-            'title' => $request->title,
+            'title'       => $request->title,
             'description' => $request->description,
             'category_id' => $request->category_id
         ]);
@@ -68,44 +55,21 @@ class PostController extends Controller
 
         return response()->json(['code'=>200, 'message'=>'Post Created successfully','data' => $post], 200);
 
-     }
+    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $post = Post::find($id);
-
-        return Response::json($post);
+        return Response::json(Post::find($id));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $post = Post::find($id);
-
-        return response()->json($post);
+        return response()->json(Post::find($id));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $post= Post::find($id)->delete();
-        return Response::json($post);
+        return Response::json(Post::find($id)->delete());
     }
 
     public function postData(Request $request)

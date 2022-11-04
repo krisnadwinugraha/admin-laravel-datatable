@@ -12,41 +12,20 @@ use Illuminate\Support\Arr;
 
 class CategoryController extends Controller
 {
-
     function __construct()
     {
-         $this->middleware('permission:category-list|category-create|category-edit|category-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:category-create', ['only' => ['create','store']]);
-         $this->middleware('permission:category-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:category-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:category-list|category-create|category-edit|category-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:category-create', ['only' => ['create','store']]);
+        $this->middleware('permission:category-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:category-delete', ['only' => ['destroy']]);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $data['categories'] = Category::orderBy('id','desc')->paginate(8);
         return view('categories', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -60,54 +39,19 @@ class CategoryController extends Controller
         return response()->json(['code'=>200, 'message'=>'Category Created successfully','data' => $category], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $category = Category::find($id);
-
-        return response()->json($category);
+        return response()->json(Category::find($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $category = Category::find($id);
-
-        return Response::json($category);
+        return Response::json(Category::find($id));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $category= Category::find($id)->delete();
-        return Response::json($category);
+        return Response::json(Category::find($id)->delete());
     }
 
     public function categoryData(Request $request)

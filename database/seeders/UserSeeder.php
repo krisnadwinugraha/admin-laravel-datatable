@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
      
         $role->givePermissionTo(['role-list','users-list','category-list','posts-list']);
         
-        $user = User::create([
+        $pelanggan = User::create([
             'name' => 'Pelanggan', 
             'email' => 'pelanggan@gmail.com',
             'phone' => '083147173945',
@@ -29,9 +29,9 @@ class UserSeeder extends Seeder
             'alamat' => 'bandung',
         ]);
      
-        $user->assignRole([$role->id]);
+        $pelanggan->assignRole([$role->id]);
 
-        $user = User::create([
+        $agent = User::create([
             'name' => 'Agent', 
             'email' => 'agent@gmail.com',
             'phone' => '083147173235',
@@ -39,10 +39,9 @@ class UserSeeder extends Seeder
             'alamat' => 'bandung',
         ]);
 
-     
-        $user->assignRole([$role->id]);
+        $agent->assignRole([$role->id]);
         
-        $user = User::create([
+        $kurir = User::create([
             'name' => 'kurir', 
             'email' => 'kurir@gmail.com',
             'phone' => '084147173945',
@@ -50,10 +49,9 @@ class UserSeeder extends Seeder
             'alamat' => 'bandung',
         ]);
 
-     
-        $user->assignRole([$role->id]);
+        $kurir->assignRole([$role->id]);
 
-        $user = User::create([
+        $driver = User::create([
             'name' => 'Driver', 
             'email' => 'driver@gmail.com',
             'phone' => '084137173945',
@@ -61,7 +59,6 @@ class UserSeeder extends Seeder
             'alamat' => 'bandung',
         ]);
 
-     
-        $user->assignRole([$role->id]);
+        $driver->assignRole([$role->id]);
     }
 }

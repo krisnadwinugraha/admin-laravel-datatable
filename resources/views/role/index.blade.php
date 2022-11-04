@@ -34,8 +34,6 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-        </tbody>
       </table>
     </div>
   </div>
@@ -46,10 +44,9 @@
 @stop
 
 @section('js')
-
 <script>
-$(function() {
-    $('#myTable').DataTable({
+  $(function() {
+      $('#myTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: "{{ route('roleData')}}",
@@ -64,7 +61,7 @@ $(function() {
               searchable: true
             }
         ]
-    });
-});
+      });
+  });
 </script>
 @stop

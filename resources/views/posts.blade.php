@@ -4,14 +4,12 @@
 
 @section('content_header')
   <h1>Post</h1>
-  <a href="javascript:void(0)" class="btn btn-danger mt-3" id="create-new-post" onclick="addPost()">Add Post</a>
-      
+  <a href="javascript:void(0)" class="btn btn-danger mt-3" id="create-new-post" onclick="addPost()">Add Post</a>  
 @stop
 
 @section('content')
-
-    <div class="row" style="clear: both;margin-top: 18px;">
-        <div class="col-12">
+  <div class="row" style="clear: both;margin-top: 18px;">
+    <div class="col-12">
         <div class="table-responsive">
           <table id="laravel_crud" class="table table-striped table-bordered">
             <thead>
@@ -24,16 +22,12 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-            </tbody>
           </table>
         </div>
-       </div>
     </div>
-</div>
-
-
+  </div>
 @stop
+
 <div class="modal fade" id="post-modal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -50,7 +44,6 @@
                         <span id="titleError" class="alert-message"></span>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="col-sm-2">Description</label>
                     <div class="col-sm-12">
@@ -59,7 +52,6 @@
                         <span id="descriptionError" class="alert-message"></span>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="category_id">Category ID</label>
                     <div class="col-sm-12">
@@ -67,7 +59,6 @@
                         <span id="categoryError" class="alert-message"></span>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="bukti_setoran">Image</label>
                     <div class="col-sm-12">
@@ -89,10 +80,11 @@
 @stop
 
 @section('js')
-<script>
-   var SITEURL = '{{URL::to('')}}';
-  $(function() {
-    $('#laravel_crud').DataTable({
+  <script>
+    var SITEURL = '{{URL::to('')}}';
+
+    $(function() {
+      $('#laravel_crud').DataTable({
         processing: true,
         serverSide: true,
         ajax: "{{ route('postData')}}",
@@ -118,26 +110,26 @@
               searchable: true
             }
         ]
+      });
     });
-  });
 
-  function addPost() {
-    $("#post_id").val('');
-    $('#post-modal').modal('show');
-  }
+    function addPost() {
+      $("#post_id").val('');
+      $('#post-modal').modal('show');
+    }
 
-  function editPost(id) {
-    var id  = id;
-    let _url = `/posts/${id}`;
-    $('#titleError').text('');
-    $('#descriptionError').text('');
-    $('#categoryError').text('');
-    $('#imageError').text('');
+    function editPost(id) {
+      var id  = id;
+      let _url = `/posts/${id}`;
+      $('#titleError').text('');
+      $('#descriptionError').text('');
+      $('#categoryError').text('');
+      $('#imageError').text('');
 
-    $.ajax({
-      url: _url,
-      type: "GET",
-      success: function(response) {
+      $.ajax({
+        url: _url,
+        type: "GET",
+        success: function(response) {
           if(response) {
             $("#post_id").val(response.id);
             $("#title").val(response.title);
@@ -147,35 +139,35 @@
             $("#category_id").val(response.category_id);
             $('#post-modal').modal('show');
           }
-      }
-    });
-  }
+        }
+      });
+    }
 
-  function createPost() {   
-    var title = $('#title').val();
-    var description = $('#description').val();
-    var image = $('#image[type=file]').val();
-    var category_id = $('#category_id option:selected').val();
-    var id = $('#post_id').val();
-    let _url     = `/posts`;
-    let _token   = $('meta[name="csrf-token"]').attr('content');
+    function createPost() {   
+      var title = $('#title').val();
+      var description = $('#description').val();
+      var image = $('#image[type=file]').val();
+      var category_id = $('#category_id option:selected').val();
+      var id = $('#post_id').val();
+      let _url     = `/posts`;
+      let _token   = $('meta[name="csrf-token"]').attr('content');
 
-    var formData = new FormData();
-        formData.append('id', id);
-        formData.append('title', title);
-        formData.append('description', description);
-        formData.append('image', $('#image[type=file]')[0].files[0]);
-        formData.append('category_id', category_id);
-        formData.append('_token', _token);
+      var formData = new FormData();
+          formData.append('id', id);
+          formData.append('title', title);
+          formData.append('description', description);
+          formData.append('image', $('#image[type=file]')[0].files[0]);
+          formData.append('category_id', category_id);
+          formData.append('_token', _token);
 
-      $.ajax({
-        url: _url,
-        type: "POST",
-        data: formData,
-        processData: false,
-        contentType: false,
-        cache: false,
-        success: function(response) {
+        $.ajax({
+          url: _url,
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          cache: false,
+          success: function(response) {
             if(response.code == 200) {
               if(id != ""){
                 var oTable = $('#laravel_crud').dataTable();
@@ -184,43 +176,43 @@
               } else {
                 var oTable = $('#laravel_crud').dataTable();
                 oTable.fnDraw(false)
-                 swal("Created!", "Data Has Been Created", "success");
+                swal("Created!", "Data Has Been Created", "success");
               }
               $('#title').val('');
               $('#description').val('');
               $('#image').val('');
               $('#category_id').val('');
-
               $('#post-modal').modal('hide');
             }
-        },
-        error: function(response) {
-          $('#titleError').text(response.responseJSON.errors.title);
-          $('#descriptionError').text(response.responseJSON.errors.description);
-          swal("Error!", "Check your Data", "error");
-        }
-      });
-  }
+          },
+          error: function(response) {
+            $('#titleError').text(response.responseJSON.errors.title);
+            $('#descriptionError').text(response.responseJSON.errors.description);
+            $('#categoryError').text(response.responseJSON.errors.category_id);
+            $('#imageError').text(response.responseJSON.errors.image);
+            swal("Error!", "Check your Data", "error");
+          }
+        });
+    }
 
-  function deletePost(id) {
-    var id = id;
-    let _url = `/posts/${id}`;
-    let _token   = $('meta[name="csrf-token"]').attr('content');
+    function deletePost(id) {
+      var id = id;
+      let _url = `/posts/${id}`;
+      let _token   = $('meta[name="csrf-token"]').attr('content');
 
-      $.ajax({
-        url: _url,
-        type: 'DELETE',
-        data: {
-          _token: _token
-        },
-        success: function(response) {
-          var oTable = $('#laravel_crud').dataTable();
-                oTable.fnDraw(false);
-          swal("Deleted!", "Data Has Been Deleted", "success");
-        }
-      });
-  }
+        $.ajax({
+          url: _url,
+          type: 'DELETE',
+          data: {
+            _token: _token
+          },
+          success: function(response) {
+            var oTable = $('#laravel_crud').dataTable();
+                  oTable.fnDraw(false);
+            swal("Deleted!", "Data Has Been Deleted", "success");
+          }
+        });
+    }
 
-</script>
-
+  </script>
 @stop
