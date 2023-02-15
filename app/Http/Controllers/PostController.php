@@ -54,7 +54,6 @@ class PostController extends Controller
         $post->save();
 
         return response()->json(['code'=>200, 'message'=>'Post Created successfully','data' => $post], 200);
-
     }
 
     public function edit($id)

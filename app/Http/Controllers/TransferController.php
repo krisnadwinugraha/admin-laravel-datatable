@@ -31,7 +31,7 @@ class TransferController extends Controller
             'name' => $request->name,
         ]);
  
-        return response()->json(['code'=>200, 'message'=>'Category Created successfully','data' => $transfer], 200);
+        return response()->json(['code'=>200, 'message'=>'Transfer Created successfully','data' => $transfer], 200);
     }
 
     public function show($id)
