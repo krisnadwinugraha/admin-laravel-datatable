@@ -13,8 +13,8 @@
                 
                 </div>
                 {!! Form::open(array('route' => 'role.store','method'=>'POST')) !!}
-                <a class="btn btn-danger" href="{{ route('role.index') }}"> Back</a>
-                <button type="submit" class="btn btn-danger">Submit</button>
+                <a class="btn btn-primary" href="{{ route('role.index') }}"> Back</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>

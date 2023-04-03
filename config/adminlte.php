@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'SpasiDigicode',
+    'title' => 'Admin Laravel',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => '<b>Spasi</b>Digicode',
-    'logo_img' => 'vendor/adminlte/dist/img/digicodelogo.svg',
+    'logo' => '<b>Admin</b>Laravel',
+    'logo_img' => 'vendor/adminlte/dist/img/logo.png',
     'logo_img_class' => 'brand-image',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'SpasiDigicode',
+    'logo_img_alt' => 'Admin Laravel',
 
     /*
     |--------------------------------------------------------------------------
@@ -168,9 +168,9 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-red elevation-4',
+    'classes_sidebar' => 'sidebar-dark-blue elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-red navbar-dark',
+    'classes_topnav' => 'navbar-blue navbar-dark',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 

@@ -5,7 +5,7 @@
 @section('content_header')
   <div class="pl-3 pt-3">
     <h1>Transfer</h1>
-    <a href="javascript:void(0)" class="btn btn-danger mt-3" id="create-new-transfer" onclick="addTransfer()">Create Transfer</a>
+    <a href="javascript:void(0)" class="btn btn-primary mt-3" id="create-new-transfer" onclick="addTransfer()">Create Transfer</a>
     <a class="btn btn-success mt-3" href="{{ route('export') }}">Export Excel</a>  
     <a class="btn btn-warning mt-3" href="{{ route('pdf') }}">Export PDF</a>  
   </div>

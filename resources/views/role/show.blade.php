@@ -5,7 +5,7 @@
 @section('content_header')
     <div class="pl-3 pt-3">
         <h1>Role</h1>
-        <a class="btn btn-danger mt-3" href="{{ route('role.index') }}"> Back</a>
+        <a class="btn btn-primary mt-3" href="{{ route('role.index') }}"> Back</a>
     </div>
 @stop
 
