@@ -3,44 +3,44 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Role Management</h2>
-            </div>
-            <div class="pull-right">
-            @can('role-create')
-                <a class="btn btn-danger mt-3" href="{{ route('role.create') }}"> Create New Role</a>
-            @endcan
-            </div>
+  <div class="pl-3 pt-3">
+    <div class="row">
+      <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+          <h2>Role Management</h2>
         </div>
-    </div>
-@stop
-
-@section('content')
-  <div class="container">
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
+        <div class="pull-right">
+          @can('role-create')
+              <a class="btn btn-danger mt-3" href="{{ route('role.create') }}"> Create New Role</a>
+          @endcan
         </div>
-    @endif
-    <div class="table-responsive">
-      <table id="myTable" class="table table-stripped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Guard Name</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-      </table>
+      </div>
     </div>
   </div>
 @stop
 
-@section('css')
-
+@section('content')
+  <div class="row p-3">
+    <div class="col-12">
+      @if ($message = Session::get('success'))
+          <div class="alert alert-success">
+              <p>{{ $message }}</p>
+          </div>
+      @endif
+      <div class="table-responsive">
+        <table id="myTable" class="table table-stripped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Guard Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
 @stop
 
 @section('js')

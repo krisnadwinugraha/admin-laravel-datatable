@@ -3,12 +3,14 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-  <h1>Post</h1>
-  <a href="javascript:void(0)" class="btn btn-danger mt-3" id="create-new-post" onclick="addPost()">Add Post</a>  
+  <div class="pl-3 pt-3">
+    <h1>Post</h1>
+    <a href="javascript:void(0)" class="btn btn-danger mt-3" id="create-new-post" onclick="addPost()">Add Post</a>  
+  </div>
 @stop
 
 @section('content')
-  <div class="row" style="clear: both;margin-top: 18px;">
+  <div class="row p-3">
     <div class="col-12">
         <div class="table-responsive">
           <table id="laravel_crud" class="table table-striped table-bordered">
@@ -74,10 +76,6 @@
     </div>
   </div>
 </div>
-
-@section('css')
-
-@stop
 
 @section('js')
   <script>

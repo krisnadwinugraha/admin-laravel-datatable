@@ -3,33 +3,34 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-  <h1>User</h1>
-  <a href="javascript:void(0)" class="btn btn-danger mt-3" id="create-new-user" onclick="addUser()">Create User</a>                            
+  <div class="pl-3 pt-3">
+    <h1>User</h1>
+    <a href="javascript:void(0)" class="btn btn-danger mt-3" id="create-new-user" onclick="addUser()">Create User</a>                            
+  </div>
 @stop
 
 @section('content')
-  <div class="container">
-    <div class="table-responsive">
-      <table id="laravel_crud" class="table table-stripped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Alamat</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>  
+  <div class="row p-3">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table id="laravel_crud" class="table table-stripped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Alamat</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>  
+    </div>
   </div>
-</div>
-
-
 @stop
 
 <div class="modal fade" id="user_modal" aria-hidden="true">
@@ -95,9 +96,6 @@
     </div>
   </div>
 </div>
-@section('css')
-
-@stop
 
 @section('js')
 <script>
@@ -222,6 +220,5 @@ $(function() {
         }
       });
   }
-
 </script>
 @stop
