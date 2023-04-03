@@ -22,11 +22,6 @@
 @section('content')
   <div class="row p-3">
     <div class="col-12">
-      @if ($message = Session::get('success'))
-          <div class="alert alert-success">
-              <p>{{ $message }}</p>
-          </div>
-      @endif
       <div class="table-responsive">
         <table id="myTable" class="table table-stripped">
           <thead>

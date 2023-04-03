@@ -10,6 +10,7 @@ use DB;
 use Hash;
 use Illuminate\Support\Arr;
 use Yajra\Datatables\Datatables;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RoleController extends Controller
 {
@@ -43,9 +44,10 @@ class RoleController extends Controller
     
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
+
+        Alert::success('Success', 'Role created successfully');
     
-        return redirect()->route('role.index')
-                        ->with('success','Role created successfully');
+        return redirect()->route('role.index');
     }
 
     public function show($id)
@@ -81,16 +83,19 @@ class RoleController extends Controller
         $role->save();
     
         $role->syncPermissions($request->input('permission'));
+
+        Alert::success('Success', 'Role updated successfully');
     
-        return redirect()->route('role.index')
-                        ->with('success','Role updated successfully');
+        return redirect()->route('role.index');
     }
 
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('role.index')
-                        ->with('success','Role deleted successfully');
+        
+        Alert::success('Success', 'Role deleted successfully');
+
+        return redirect()->route('role.index');
     }
 
     public function roleData(Request $request)

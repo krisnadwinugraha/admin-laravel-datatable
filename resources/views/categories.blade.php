@@ -5,7 +5,7 @@
 @section('content_header')
   <div class="pl-3 pt-3">
     <h1>Category</h1>
-    <a href="javascript:void(0)" class="btn btn-danger mt-3" id="create-new-category" onclick="addCategory()">Add Category</a>
+    <a href="javascript:void(0)" class="btn btn-danger mt-3" id="create-new-category" onclick="addCategory()">Create Category</a>
   </div>
 @stop
 
