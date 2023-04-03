@@ -1,4 +1,4 @@
-1. Clone https://github.com/themestry/laravel-starter.git
+1. Clone https://github.com/krisnadwinugraha/admin-laravel-datatable
 2. composer install
 3. copy .env.example .env  (cp .env.example .env)
 4. Ubah Nama database di env
